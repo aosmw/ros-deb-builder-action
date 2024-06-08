@@ -70,6 +70,7 @@ runs:
       #https://github.com/jspricke/ros-deb-builder-action/issues/38
       run: |
         sudo sed -i "s/DISABLE_NETWORK.*/DISABLE_NETWORK => 0,/" /usr/share/perl5/Sbuild/Build.pm
+      shell: sh
     - name: Create packages
       run: $GITHUB_ACTION_PATH/build
       shell: sh
