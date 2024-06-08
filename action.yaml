@@ -66,6 +66,10 @@ runs:
         DEB_ARCH: ${{ inputs.DEB_ARCH }}
         REPOS_FILE: ${{ inputs.REPOS_FILE }}
         SBUILD_CONF: ${{ inputs.SBUILD_CONF }}
+    - name: patch sbuild to allow use of cmake ExternalProject until new ENABLE_NETWORK feature is released
+      #https://github.com/jspricke/ros-deb-builder-action/issues/38
+      run: |
+        sudo sed -i "s/DISABLE_NETWORK.*/DISABLE_NETWORK => 0,/" /usr/share/perl5/Sbuild/Build.pm
     - name: Create packages
       run: $GITHUB_ACTION_PATH/build
       shell: sh
